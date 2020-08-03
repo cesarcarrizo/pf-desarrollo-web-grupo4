@@ -64,7 +64,7 @@ module.exports = (database) => {
     //una vez von los datos en el arreglo procedo a hacer la insercion
     await database.insert(
       "usuarios",
-      "ced_fk_usu_pk",
+      "ced_usu_pk",
       req.body.ced_adm_pk,
       dataUsuario
     );

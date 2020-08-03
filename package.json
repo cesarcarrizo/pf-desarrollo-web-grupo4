@@ -1,0 +1,24 @@
+{
+  "name": "team-tech-solution",
+  "version": "1.1.4",
+  "description": "Solución al proyecto final solicitado en por el instructor Mauricio Rivera, integración de los servicios mysql, ejs, express, nodemon, nodejs, bootstrap 4, body-parser fueron necesarios para la armonía del correcto manejo de las peticiones y respuestas por parte del servidor (127.0.0.1:3000) y que coinciden con todo lo anterior planteado en los avances anteriores.",
+  "main": "servidor.js",
+  "scripts": {
+    "start": "node servidor.js",
+    "dev": "nodemon servidor.js"
+  },
+  "keywords": [
+    "Proyecto",
+    "Final",
+    "ULACIT"
+  ],
+  "author": "César Carrizo, Angie Herrera, Carlo Lacayo & Adrián Solís",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.4"
+  }
+}

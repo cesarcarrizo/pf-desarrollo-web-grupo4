@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('parciales/head') %>
+    <title>Servicios</title>
+    <style>
+      body {
+        background: url("/static/alex.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%- include('parciales/encabezado') %>
+
+    <!-- BODY -->
+    <div class="container">
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>Servicios</h1>
+        <p>
+          Team Tech es una firma certificada en excelencia para las diversas
+          soluciones que proveemos.
+        </p>
+
+        <div class="jumbotron bg-primary text-light">
+          <div class="row">
+            <div class="col-sm-3">
+              <h3><%= servicios[0] %></h3>
+              <p>
+                Se usa en el mundo de los negocios para hacer referencia a una
+                actividad socioeconómica en la que profesionales y emprendedores
+                se reúnen para formar relaciones empresariales, crear y
+                desarrollar oportunidades de negocio, compartir información y
+                buscar clientes potenciales.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <h3><%= servicios[1] %></h3>
+              <p>
+                Un área que proporciona asistencia a los usuarios al tener algún
+                problema al utilizar un producto o servicio, ya sea este el
+                hardware o software de una computadora, de un servidor de
+                Internet, de los periféricos, o de cualquier otro equipo o
+                dispositivo.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <h3><%= servicios[2] %></h3>
+              <p>
+                Copia de los datos originales que se realiza con el fin de
+                disponer de un medio para recuperarlos en caso de su pérdida.
+                Las copias de seguridad son útiles ante distintos eventos y
+                usos: recuperar los sistemas informáticos y los datos de una
+                catástrofe informática, natural o ataque.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <h3><%= servicios[3] %></h3>
+              <p>
+                Proceso de recuperación que cubre los datos, el hardware y el
+                software crítico, para que un negocio pueda comenzar de nuevo
+                sus operaciones en caso de un desastre natural o causado por
+                humanos.
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-3">
+              <h3><%= servicios[4] %></h3>
+              <p>
+                Son herramientas que habilitan a un tercero la conexión a un
+                ordenador remoto a través de Internet. A pesar de que el
+                objetivo principal es facilitar el acceso a los ordenadores que
+                se encuentran en cualquier parte del mundo, las aplicaciones de
+                soporte remoto también proporcionan características como la
+                transferencia de archivos, escritorio compartido o
+                sincronización de archivos.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <h3><%= servicios[5] %></h3>
+              <p>
+                Nuestra aplicación de varias plataformas permite que los
+                clientes compartan su pantalla iOS o Android con usted en iOS,
+                Mac OS, Windows o Android.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <h3><%= servicios[6] %></h3>
+              <p>
+                El objetivo principal del mantenimiento preventivo es alargar la
+                vida útil de tu computadora y evitar posibles fallas en un
+                futuro.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <h3><%= servicios[7] %></h3>
+              <p>
+                Los cambios en el entorno, en las economías, los gobiernos, la
+                competencia, las tecnologías y otros son una constante, al igual
+                que lo es en los negocios. Estos cambios también generan nuevas
+                oportunidades, pero también conllevan riesgos difíciles de
+                predecir.
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <h3><%= servicios[8] %></h3>
+              <p>
+                Enfatiza el papel de las comunicaciones unificadas y la
+                integración de las telecomunicaciones (líneas telefónicas y
+                señales inalámbricas) y las computadoras.
+              </p>
+            </div>
+            <div class="col-sm-4">
+              <h3><%= servicios[9] %></h3>
+              <p>Entrenamiento y capacitacion.</p>
+            </div>
+            <div class="col-sm-4">
+              <h3><%= servicios[10] %></h3>
+              <p>
+                Medidas preventivas y reactivas de1​ las organizaciones y
+                sistemas tecnológicos que permiten resguardar y proteger la
+                información buscando mantener la confidencialidad, la
+                disponibilidad e integridad de datos de nuestros clientes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--FIN BODY-->
+    <%- include('parciales/nav') %> <%- include('parciales/scripts') %>
+  </body>
+</html>

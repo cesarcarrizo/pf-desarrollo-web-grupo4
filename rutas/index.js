@@ -34,7 +34,7 @@ module.exports = (database) => {
   });
 
   // ruta del registro para ser administrador
-  router.get("/registroAdmin", async (req, res) => {
+  router.get("/registroAdmin", (req, res) => {
     res.render("paginas/registroAdmin");
   });
   // cuando el formulario del admin se envia se controla con:
@@ -76,6 +76,11 @@ module.exports = (database) => {
   router.get("/personal", (req, res) => {
     res.render("paginas/personal");
     // fix
+  });
+
+  // ruta para sobre nosotros
+  router.get("/about", (req, res) => {
+    res.render("paginas/about");
   });
 
   return router;

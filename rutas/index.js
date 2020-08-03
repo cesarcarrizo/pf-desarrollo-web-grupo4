@@ -37,6 +37,7 @@ module.exports = (database) => {
   router.get("/registroAdmin", (req, res) => {
     res.render("paginas/registroAdmin");
   });
+
   // cuando el formulario del admin se envia se controla con:
   router.post("/registroAdmin", async (req, res) => {
     /* 
@@ -81,6 +82,47 @@ module.exports = (database) => {
   // ruta para sobre nosotros
   router.get("/about", (req, res) => {
     res.render("paginas/about");
+  });
+
+  // ruta para registrar una solicitud nueva para ser profesional
+  router.get("/registroProf", (req, res) => {
+    res.render("paginas/registroProf");
+  });
+
+  router.post("/registroProf", async (req, res) => {
+    /* 
+      al crear un profesional, se inicia con estado pendiente,
+      seguidamente se crea un usuario.
+    */
+
+    // creo un arreglo bidimensional con el nombre de las columnas y los valores a insertar (tomados del req.body)
+    let dataProf = [
+      ["nom_pro", req.body.nom_pro],
+      ["ape_pro", req.body.ape_pro],
+      ["telf_pro", req.body.telf_pro],
+      ["email_pro", req.body.email_pro],
+      ["resi_pro", req.body.resi_pro], //el estado se maneja desde el modulo database
+    ];
+    //una vez von los datos en el arreglo procedo a hacer la insercion
+    await database.insert(
+      "profesionales",
+      "ced_pro_pk",
+      req.body.ced_pro_pk,
+      dataProf
+    );
+
+    //inmediatamente paso a crear un usuario, se preparan los datos
+    let dataUsuario = [["passwd_usu", req.body.passwd_usu]]; // el tipo de usuario se maneja desde el modulo database
+    //una vez von los datos en el arreglo procedo a hacer la insercion
+    await database.insert(
+      "usuarios",
+      "ced_usu_pk",
+      req.body.ced_pro_pk,
+      dataUsuario
+    );
+
+    // si todo salio bien me redirige al inicio
+    res.redirect("/");
   });
 
   return router;

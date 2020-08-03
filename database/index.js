@@ -85,6 +85,11 @@ registros.insert = (tabla, col, pk, nuevaData) => {
       columnas += ",estado_adm";
       valores += ",0";
     }
+    // si la tabla es profesionales se agrega el estado inicial 0: pendiente (1: aceptado, 2: rechazado)
+    if (tabla == "administradores") {
+      columnas += ",estado_pro";
+      valores += ",0";
+    }
     // si la tabla es usuarios se agrega el estado inicial 0: sin asignar (1: admin, 2: profesional)
     if (tabla == "usuarios") {
       columnas += ",tipo_usu";

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('parciales/head') %>
+    <title>TECH TEAM - INICIAR SESIÓN</title>
+    <style>
+      #bgright {
+        background-color: black;
+      }
+      #formLogin {
+        padding: 100px;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      #division {
+        position: fixed;
+        padding: 0;
+        margin: 0;
+
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+      }
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- BODY -->
+
+    <div class="container-fluid" id="division">
+      <div class="row">
+        <div class="col" id="bgright" style="color: azure;">
+          <br /><br /><br /><br /><br /><br />
+          <img src="/static/logo.png" width="400" height="400" />
+          <br /><br /><br />
+          <h1 style="text-align: center;">Iniciar Sesión</h1>
+          <div style="text-align: end; padding: 400px;"></div>
+        </div>
+
+        <div
+          class="col"
+          id="bgleft"
+          style="padding-top: 50px; padding-bottom: 0px;"
+        >
+          <div class="container">
+            <h2 style="font-size: 50px;">Bienvenido, Profesional</h2>
+          </div>
+          <form id="formLogin" method="POST" role="form">
+            <div class="form-group">
+              <label>Usuario</label>
+              <input type="text" class="form-control" name="ced" />
+              <small class="form-text text-muted"
+                >Recuerde nunca compartir sus datos personales con nadie</small
+              >
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" name="passwd" />
+            </div>
+            <div class="form-group">
+              <input
+                type="submit"
+                class="btn btn-outline-dark"
+                value="Ingresar!"
+              />
+              <input
+                type="button"
+                class="btn btn-outline-secondary"
+                value="Salir"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- FIN -->
+
+    <%- include('parciales/nav') %> <%- include('parciales/scripts') %>
+  </body>
+</html>

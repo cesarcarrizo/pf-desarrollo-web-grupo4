@@ -14,6 +14,16 @@ module.exports = (database) => {
     res.render("paginas/index");
   });
 
+  //ruta de la pagina eleccion (especifica que usuario va a iniciar sesion)
+  router.get("/eleccion", (req, res) => {
+    res.render("paginas/eleccion");
+  });
+
+  //ruta del inicio de sesion
+  router.get("/login", (req, res) => {
+    res.render("paginas/login");
+  });
+
   // ruta de la pagina servicios
   router.get("/servicios", (req, res) => {
     res.render("paginas/servicios", {

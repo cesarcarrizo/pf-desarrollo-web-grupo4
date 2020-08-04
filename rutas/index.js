@@ -4,50 +4,57 @@
 */
 
 const express = require("express");
+const { select } = require("../database");
 
 const router = express.Router();
 
 // database: objeto importado del modulo database que se pasa desde el servidor
 module.exports = (database) => {
-  // ruta de la pagina home
-  router.get("/", (req, res) => {
-    res.render("paginas/index");
-  });
-
-  //ruta de la pagina eleccion (especifica que usuario va a iniciar sesion)
-  router.get("/eleccion", (req, res) => {
-    res.render("paginas/eleccion");
-  });
-
+  //////////////////////////// LOGIN ADMIN //////////////////////////////
   //ruta del inicio de sesion
-  router.get("/login", (req, res) => {
-    res.render("paginas/login");
+  router.get("/loginA", (req, res) => {
+    res.render("paginas/loginA");
+  });
+  router.post("/loginA", async (req, res) => {
+    try {
+      // se consulta primero si el usuario digitado existe
+      let registro = await database.validarUsuario(
+        req.body.ced,
+        req.body.passwd
+      );
+      if (registro[0].tipo_usu == 0) {
+        // si esta en estado pendiente redirige al home
+        res.redirect("/");
+      }
+      if (registro[0].tipo_usu == 1) {
+        // si es un administrador:
+        datosAdminRegistrado = await database.select(
+          "administradores",
+          "ced_adm_pk",
+          req.body.ced
+        );
+        res.redirect("paginas/menuAdmin");
+      }
+      if (registro[0].tipo_usu == 2) {
+        // si es profesional redirije al profesional.
+      }
+    } catch (err) {
+      console.log(err);
+      res.send("Usuario no existente.");
+    }
   });
 
-  // ruta de la pagina servicios
-  router.get("/servicios", (req, res) => {
-    res.render("paginas/servicios", {
-      servicios: [
-        "Networking",
-        "PC Support & Instalación",
-        "Back Up SDD & HDD",
-        "Recuperación de datos",
-        "Soporte Remoto",
-        "Soporte Smartphone",
-        "Reparaciones PC/Mac",
-        "Consultorias",
-        "IT",
-        "Training",
-        "Infosec",
-      ],
-    });
+  //////////////////////////// MENU ADMIN //////////////////////////////
+  //ruta del menu del admin
+  router.get("/menuAdmin", (req, res) => {
+    res.render("paginas/menuAdmin");
   });
 
+  //////////////////////////// REGISRO ADMIN //////////////////////////////
   // ruta del registro para ser administrador
   router.get("/registroAdmin", (req, res) => {
     res.render("paginas/registroAdmin");
   });
-
   // cuando el formulario del admin se envia se controla con:
   router.post("/registroAdmin", async (req, res) => {
     /* 
@@ -84,21 +91,40 @@ module.exports = (database) => {
     res.redirect("/");
   });
 
-  router.get("/personal", (req, res) => {
-    res.render("paginas/personal");
-    // fix
+  //////////////////////////// LOGIN PROFESIONAL ///////////////////////////////////
+  //ruta del inicio de sesion
+  router.get("/loginP", (req, res) => {
+    res.render("paginas/loginP");
   });
 
-  // ruta para sobre nosotros
-  router.get("/about", (req, res) => {
-    res.render("paginas/about");
+  let datosAdminRegistrado = [];
+  let datosProfRegistrado = [];
+  let tipoUsuario = 0;
+
+  // ruta de la pagina servicios
+  router.get("/servicios", (req, res) => {
+    res.render("paginas/servicios", {
+      servicios: [
+        "Networking",
+        "PC Support & Instalación",
+        "Back Up SDD & HDD",
+        "Recuperación de datos",
+        "Soporte Remoto",
+        "Soporte Smartphone",
+        "Reparaciones PC/Mac",
+        "Consultorias",
+        "IT",
+        "Training",
+        "Infosec",
+      ],
+    });
   });
 
+  //////////////////////////// REGISTRO PROFESIONAL /////////////////////
   // ruta para registrar una solicitud nueva para ser profesional
   router.get("/registroProf", (req, res) => {
     res.render("paginas/registroProf");
   });
-
   router.post("/registroProf", async (req, res) => {
     /* 
       al crear un profesional, se inicia con estado pendiente,
@@ -133,6 +159,30 @@ module.exports = (database) => {
 
     // si todo salio bien me redirige al inicio
     res.redirect("/");
+  });
+
+  //////////////////////////// LOGIN PERSONAL //////////////////////////////
+  router.get("/personal", (req, res) => {
+    res.render("paginas/personal");
+    // fix
+  });
+
+  //////////////////////////// LOGIN ABOUT //////////////////////////////
+  // ruta para sobre nosotros
+  router.get("/about", (req, res) => {
+    res.render("paginas/about");
+  });
+
+  //////////////////////////// HOME ////////////////////////////////////
+  // ruta de la pagina home
+  router.get("/", (req, res) => {
+    res.render("paginas/index");
+  });
+
+  //////////////////////////// ELECCION ////////////////////////////////
+  //ruta de la pagina eleccion (especifica que usuario va a iniciar sesion)
+  router.get("/eleccion", (req, res) => {
+    res.render("paginas/eleccion");
   });
 
   return router;

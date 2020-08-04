@@ -51,35 +51,31 @@
           style="padding-top: 50px; padding-bottom: 0px;"
         >
           <div class="container">
-            <h2 style="font-size: 50px;">Bienvenido</h2>
+            <h2 style="font-size: 50px;">Bienvenido Admin</h2>
           </div>
           <form id="formLogin" method="POST" role="form">
             <div class="form-group">
               <label>Usuario</label>
-              <input type="text" class="form-control" name="ced_usu_pk" />
+              <input type="text" class="form-control" name="ced" />
               <small class="form-text text-muted"
                 >Recuerde nunca compartir sus datos personales con nadie</small
               >
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="password" class="form-control" name="passwd_usu" />
+              <input type="password" class="form-control" name="passwd" />
             </div>
             <div class="form-group">
-              <a href="#" role="button"
-                ><input
-                  type="submit"
-                  class="btn btn-outline-secondary"
-                  value="Ingresar!"
-                />
-              </a>
-              <a href="/" role="button"
-                ><input
-                  type="button"
-                  class="btn btn-outline-secondary"
-                  value="Salir"
-                />
-              </a>
+              <input
+                type="submit"
+                class="btn btn-outline-dark"
+                value="Ingresar!"
+              />
+              <input
+                type="button"
+                class="btn btn-outline-secondary"
+                value="Salir"
+              />
             </div>
           </form>
         </div>

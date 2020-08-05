@@ -75,19 +75,49 @@ module.exports = (database) => {
     });
   });
   router.post("/solicitudesAdm", async (req, res) => {
-    if (req.body.contratado == "Contratar") {
-      let pk = req.body.seleccion.split(" ", 1);
-      await database.update("administradores", "ced_adm_pk", pk[0], [
-        ["estado_adm", 1],
-      ]);
+    try {
+      if (req.body.contratado == "Contratar") {
+        let pk = req.body.seleccion.split(" ", 1);
+        await database.update("administradores", "ced_adm_pk", pk[0], [
+          ["estado_adm", 1],
+        ]);
+      }
+      if (req.body.rechazado == "Rechazar") {
+        let pk = req.body.seleccion.split(" ", 1);
+        await database.update("administradores", "ced_adm_pk", pk[0], [
+          ["estado_adm", 2],
+        ]);
+      }
+      res.redirect("/solicitudesAdm");
+    } catch (err) {
+      console.log(err);
     }
-    if (req.body.rechazado == "Rechazar") {
-      let pk = req.body.seleccion.split(" ", 1);
-      await database.update("administradores", "ced_adm_pk", pk[0], [
-        ["estado_adm", 2],
-      ]);
+  });
+
+  //////////////////////////// SOLICITUDES PARA SER PROFESIONAL ///////////////
+  router.get("/solicitudesProf", async (req, res) => {
+    res.render("paginas/solicitudesProf", {
+      peticiones: await database.getProfPeticiones(),
+    });
+  });
+  router.post("/solicitudesProf", async (req, res) => {
+    try {
+      if (req.body.contratado == "Contratar") {
+        let pk = req.body.seleccion.split(" ", 1);
+        await database.update("profesionales", "ced_pro_pk", pk[0], [
+          ["estado_pro", 1],
+        ]);
+      }
+      if (req.body.rechazado == "Rechazar") {
+        let pk = req.body.seleccion.split(" ", 1);
+        await database.update("profesionales", "ced_pro_pk", pk[0], [
+          ["estado_pro", 2],
+        ]);
+      }
+      res.redirect("/solicitudesProf");
+    } catch (err) {
+      console.log(err);
     }
-    res.redirect("/solicitudesAdm");
   });
 
   //////////////////////////// REGISTRO ADMIN //////////////////////////////

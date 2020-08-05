@@ -28,6 +28,20 @@ registros.getAdminPeticiones = () => {
     );
   });
 };
+
+registros.getProfPeticiones = () => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT * FROM profesionales WHERE estado_pro=0;`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
 /*
   Funcion que selecciona un registro entero de una tabla bajo una condicional de tipo
   'igual a' y usando un where clause

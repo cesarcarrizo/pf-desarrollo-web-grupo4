@@ -2,12 +2,25 @@
 <html lang="en">
   <head>
     <%- include('parciales/head') %>
-    <title>TECH TEAM - MENU ADMIN</title>
+    <title>TECH TEAM - ADMIN</title>
   </head>
   <body>
+    <%- include('parciales/encabezadoAdm') %>
     <!-- BODY -->
-    <div class="container"></div>
-
+    <div class="container">
+      <hr />
+      <div class="h1 text-dark">Perfil</div>
+      <hr />
+      <img src="/static/puertas.jpg" class="img-fluid" alt="Responsive image" />
+      <hr />
+      <h3>ADMIN: <%= nom_adm %></h3>
+      <br />
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Apellidos: <%= ape_adm %></li>
+        <li class="list-group-item">Email: <%= email_adm %></li>
+        <li class="list-group-item">Telefono: <%= telf_adm %></li>
+      </ul>
+    </div>
     <!-- FIN -->
     <%- include('parciales/navAdmin') %> <%- include('parciales/scripts') %>
   </body>

@@ -9,8 +9,8 @@ const router = express.Router();
 
 // database: objeto importado del modulo database que se pasa desde el servidor
 module.exports = (database) => {
-  let datosAdminRegistrado = [];
-  let datosProfRegistrado = [];
+  let datosAdminEnsesionado = [];
+  let datosProfEnsesionado = [];
   let tipoUsuario = 0;
 
   //////////////////////////// LOGIN ADMIN //////////////////////////////
@@ -27,7 +27,7 @@ module.exports = (database) => {
         req.body.ced
       );
       //si la contresena es correcta se prosigue direccionar
-      if (consulta[0].passwd_usu == req.body.passwd_usu) {
+      if (consulta[0].passwd_usu == req.body.passwd) {
         let registro = await database.select(
           "administradores",
           "ced_adm_pk",
@@ -38,22 +38,34 @@ module.exports = (database) => {
           res.send("Pendiente");
         }
         if (registro[0].estado_adm == 1) {
-          // res.redirect('/menuAdmin');
-          res.send("Aceptado");
+          // una vez validado se guarda la info en un objeto global
+          datosAdminEnsesionado = registro;
+          console.log(datosAdminEnsesionado);
+          res.redirect("/menuAdmin");
         }
         if (registro[0].estado_adm == 2) {
           res.send("REchaazado");
         }
       } else {
-        console.log("No hubo match");
+        res.send("No hubo match en el passwd");
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+      res.send("No existe el nombre de usuario");
+    }
   });
 
   //////////////////////////// MENU ADMIN //////////////////////////////
   //ruta del menu del admin
   router.get("/menuAdmin", (req, res) => {
-    res.render("paginas/menuAdmin");
+    res.render("paginas/menuAdmin", {
+      // todos son strings
+      ced_adm_pk: datosAdminEnsesionado[0].ced_adm_pk,
+      nom_adm: datosAdminEnsesionado[0].nom_adm,
+      ape_adm: datosAdminEnsesionado[0].ape_adm,
+      telf_adm: datosAdminEnsesionado[0].telf_adm,
+      email_adm: datosAdminEnsesionado[0].email_adm,
+    });
   });
 
   //////////////////////////// REGISTRO ADMIN //////////////////////////////
@@ -101,6 +113,39 @@ module.exports = (database) => {
   //ruta del inicio de sesion
   router.get("/loginP", (req, res) => {
     res.render("paginas/loginP");
+  });
+  router.post("/loginP", async (req, res) => {
+    try {
+      // hago una consulta para verificar que los datos existan
+      let consulta = await database.select(
+        "usuarios",
+        "ced_usu_pk",
+        req.body.ced
+      );
+      //si la contresena es correcta se prosigue direccionar
+      if (consulta[0].passwd_usu == req.body.passwd) {
+        let registro = await database.select(
+          "profesionales",
+          "ced_pro_pk",
+          req.body.ced
+        );
+        if (registro[0].estado_adm == 0) {
+          //res.redirect('/');
+          res.send("Pendiente");
+        }
+        if (registro[0].estado_adm == 1) {
+          res.redirect("/menuProf");
+        }
+        if (registro[0].estado_adm == 2) {
+          res.send("REchaazado");
+        }
+      } else {
+        res.send("No hubo match en el passwd");
+      }
+    } catch (err) {
+      console.log(err);
+      res.send("No existe el nombre de usuario");
+    }
   });
 
   //////////////////////////// REGISTRO PROFESIONAL /////////////////////

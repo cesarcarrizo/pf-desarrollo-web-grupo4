@@ -163,28 +163,4 @@ registros.update = (tabla, col, pk, nuevaData) => {
   });
 };
 
-/*
-  Funcion que valida la existencia de una peticion y la maneja.
-  params:
-  ced: cedula del usuario
-  passwd: contrasena del usuario
-*/
-registros.validarUsuario = (ced, passwd) => {
-  try {
-    return new Promise((resolve, reject) => {
-      conx.query(
-        `SELECT * FROM usuarios WHERE ced_usu_pk = ${ced} AND passwd_usu = '${passwd}';`,
-        (err, resultados) => {
-          if (err) return reject(err);
-          else {
-            return resolve(JSON.parse(JSON.stringify(resultados)));
-          }
-        }
-      );
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 module.exports = registros;

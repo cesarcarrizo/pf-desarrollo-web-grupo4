@@ -4,7 +4,6 @@
 */
 
 const express = require("express");
-const { select } = require("../database");
 
 const router = express.Router();
 
@@ -15,11 +14,41 @@ module.exports = (database) => {
   let tipoUsuario = 0;
 
   //////////////////////////// LOGIN ADMIN //////////////////////////////
-  //ruta del inicio de sesion
+  //ruta del inicio de sesion del admin
   router.get("/loginA", (req, res) => {
     res.render("paginas/loginA");
   });
-  router.post("/loginA", async (req, res) => {});
+  router.post("/loginA", async (req, res) => {
+    try {
+      // hago una consulta para verificar que los datos existan
+      let consulta = await database.select(
+        "usuarios",
+        "ced_usu_pk",
+        req.body.ced
+      );
+      //si la contresena es correcta se prosigue direccionar
+      if (consulta[0].passwd_usu == req.body.passwd_usu) {
+        let registro = await database.select(
+          "administradores",
+          "ced_adm_pk",
+          req.body.ced
+        );
+        if (registro[0].estado_adm == 0) {
+          //res.redirect('/');
+          res.send("Pendiente");
+        }
+        if (registro[0].estado_adm == 1) {
+          // res.redirect('/menuAdmin');
+          res.send("Aceptado");
+        }
+        if (registro[0].estado_adm == 2) {
+          res.send("REchaazado");
+        }
+      } else {
+        console.log("No hubo match");
+      }
+    } catch (err) {}
+  });
 
   //////////////////////////// MENU ADMIN //////////////////////////////
   //ruta del menu del admin

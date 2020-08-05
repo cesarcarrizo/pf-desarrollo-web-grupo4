@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('parciales/head') %>
+    <title>TECH TEAM - PROFESIONALES</title>
+  </head>
+  <body>
+    <%- include('parciales/encabezadoProf') %>
+    <!-- BODY -->
+    <div class="container">
+      <hr />
+      <div class="h1 text-dark">Perfil</div>
+      <br />
+      <h3>PROFESIONAL: <%= prof[0].nom_pro %></h3>
+      <br />
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Apellidos: <%= prof[0].ape_pro %></li>
+        <li class="list-group-item">Email: <%= prof[0].email_pro %></li>
+        <li class="list-group-item">Telefono: <%= prof[0].telf_pro %></li>
+        <li class="list-group-item">Direccion: <%= prof[0].resi_pro %></li>
+      </ul>
+    </div>
+    <!-- FIN -->
+    <%- include('parciales/navProf') %> <%- include('parciales/scripts') %>
+  </body>
+</html>

@@ -78,19 +78,28 @@ module.exports = (database) => {
     try {
       if (req.body.contratado == "Contratar") {
         let pk = req.body.seleccion.split(" ", 1);
+        // se actualizan los estados de acceso
         await database.update("administradores", "ced_adm_pk", pk[0], [
-          ["estado_adm", 1],
+          ["estado_adm", "1"], //1: contratado
+        ]);
+        await database.update("usuarios", "ced_usu_pk", pk[0], [
+          ["tipo_usu", "1"], // 1: administrador
         ]);
       }
       if (req.body.rechazado == "Rechazar") {
         let pk = req.body.seleccion.split(" ", 1);
+        // se actualizan los estados de acceso
         await database.update("administradores", "ced_adm_pk", pk[0], [
-          ["estado_adm", 2],
+          ["estado_adm", "2"], //2: rechazdo
+        ]);
+        await database.update("usuarios", "ced_usu_pk", pk[0], [
+          ["tipo_usu", "1"],
         ]);
       }
       res.redirect("/solicitudesAdm");
     } catch (err) {
       console.log(err);
+      res.redirect("/solicitudesAdm");
     }
   });
 
@@ -104,19 +113,28 @@ module.exports = (database) => {
     try {
       if (req.body.contratado == "Contratar") {
         let pk = req.body.seleccion.split(" ", 1);
+        // se actualizan los estados de acceso
         await database.update("profesionales", "ced_pro_pk", pk[0], [
-          ["estado_pro", 1],
+          ["estado_pro", "1"],
+        ]);
+        await database.update("usuarios", "ced_usu_pk", pk[0], [
+          ["tipo_usu", "2"], // 2: profesional
         ]);
       }
       if (req.body.rechazado == "Rechazar") {
         let pk = req.body.seleccion.split(" ", 1);
+        // se actualizan los estados de acceso
         await database.update("profesionales", "ced_pro_pk", pk[0], [
-          ["estado_pro", 2],
+          ["estado_pro", "2"], // 2: rechazado
+        ]);
+        await database.update("usuarios", "ced_usu_pk", pk[0], [
+          ["tipo_usu", "2"],
         ]);
       }
       res.redirect("/solicitudesProf");
     } catch (err) {
       console.log(err);
+      res.redirect("/solicitudesProf");
     }
   });
 
@@ -181,14 +199,15 @@ module.exports = (database) => {
           "ced_pro_pk",
           req.body.ced
         );
-        if (registro[0].estado_adm == 0) {
+        if (registro[0].estado_pro == 0) {
           //res.redirect('/');
           res.send("Pendiente");
         }
-        if (registro[0].estado_adm == 1) {
+        if (registro[0].estado_pro == 1) {
+          datosProfEnsesionado = registro;
           res.redirect("/menuProf");
         }
-        if (registro[0].estado_adm == 2) {
+        if (registro[0].estado_pro == 2) {
           res.send("REchaazado");
         }
       } else {
@@ -239,6 +258,14 @@ module.exports = (database) => {
 
     // si todo salio bien me redirige al inicio
     res.redirect("/");
+  });
+
+  //////////////////////////// MENU PROFESIONAL //////////////////////////////
+  //ruta del menu del admin
+  router.get("/menuProf", (req, res) => {
+    res.render("paginas/menuProf", {
+      prof: datosAdminEnsesionado,
+    });
   });
 
   //////////////////////////// PERSONAL //////////////////////////////

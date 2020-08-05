@@ -68,6 +68,13 @@ module.exports = (database) => {
     });
   });
 
+  //////////////////////////// SOLICITUDES PARA SER ADMIN //////////////////
+  router.get("/solicitudesAdm", async (req, res) => {
+    res.render("paginas/solicitudesAdm", {
+      peticiones: await database.getAdminPeticiones(),
+    });
+  });
+
   //////////////////////////// REGISTRO ADMIN //////////////////////////////
   // ruta del registro para ser administrador
   router.get("/registroAdmin", (req, res) => {
@@ -195,7 +202,7 @@ module.exports = (database) => {
     // fix
   });
 
-  //////////////////////////// ABOUT //////////////////////////////
+  //////////////////////////// ABOUT //////////////////////////////////
   // ruta para sobre nosotros
   router.get("/about", (req, res) => {
     res.render("paginas/about");

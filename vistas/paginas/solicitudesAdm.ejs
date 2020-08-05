@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('parciales/head') %>
+    <title>TECH TEAM - ADMIN - Solicitudes</title>
+    <style>
+      .row {
+        font-size: 20px;
+      }
+      thead {
+        text-align: center;
+      }
+      tbody {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('parciales/encabezadoAdm') %>
+    <!-- BODY -->
+    <div class="container">
+      <div class="jumbotron">
+        <h2>Solicitudes para ser Administrador</h2>
+
+        <br />
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Telefono</th>
+              <th>Email</th>
+              <th style="width: 215px;"></th>
+            </tr>
+          </thead>
+          <tbody id="myTable">
+            <% peticiones.forEach((peticion)=>{ %>
+            <tr style="height: 10px;">
+              <td><%= peticion.ced_adm_pk %></td>
+              <td><%= peticion.nom_adm %></td>
+              <td><%= peticion.telf_adm %></td>
+              <td><%= peticion.email_adm %></td>
+              <td style="width: 30px;">
+                <form method="POST" role="form">
+                  <div class="form-group">
+                    <input
+                      type="submit"
+                      value="Contratar"
+                      class="btn btn-outline-success"
+                      name="contratado"
+                    />
+
+                    <input
+                      type="submit"
+                      value="Rechazar"
+                      class="btn btn-outline-danger"
+                      name="rechazado"
+                    />
+                  </div>
+                </form>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FIN -->
+    <%- include('parciales/navAdmin') %> <%- include('parciales/scripts') %>
+  </body>
+</html>

@@ -15,6 +15,19 @@ const conx = mysql.createPool(config);
 // objeto a devolver con los registros o el output de las operaciones
 let registros = {};
 
+registros.getAdminPeticiones = () => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT * FROM administradores WHERE estado_adm=0;`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
 /*
   Funcion que selecciona un registro entero de una tabla bajo una condicional de tipo
   'igual a' y usando un where clause

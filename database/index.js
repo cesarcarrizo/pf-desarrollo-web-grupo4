@@ -99,7 +99,7 @@ registros.insert = (tabla, col, pk, nuevaData) => {
       valores += ",0";
     }
     // si la tabla es profesionales se agrega el estado inicial 0: pendiente (1: aceptado, 2: rechazado)
-    if (tabla == "administradores") {
+    if (tabla == "profesionales") {
       columnas += ",estado_pro";
       valores += ",0";
     }

@@ -74,9 +74,19 @@ module.exports = (database) => {
       peticiones: await database.getAdminPeticiones(),
     });
   });
-  router.post("/solicitudesAdm", (req, res) => {
-    console.log(req.body.contratado);
-    console.log(req.body.rechazado);
+  router.post("/solicitudesAdm", async (req, res) => {
+    if (req.body.contratado == "Contratar") {
+      let pk = req.body.seleccion.split(" ", 1);
+      await database.update("administradores", "ced_adm_pk", pk[0], [
+        ["estado_adm", 1],
+      ]);
+    }
+    if (req.body.rechazado == "Rechazar") {
+      let pk = req.body.seleccion.split(" ", 1);
+      await database.update("administradores", "ced_adm_pk", pk[0], [
+        ["estado_adm", 2],
+      ]);
+    }
     res.redirect("/solicitudesAdm");
   });
 

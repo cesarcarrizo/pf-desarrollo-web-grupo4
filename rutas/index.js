@@ -74,6 +74,11 @@ module.exports = (database) => {
       peticiones: await database.getAdminPeticiones(),
     });
   });
+  router.post("/solicitudesAdm", (req, res) => {
+    console.log(req.body.contratado);
+    console.log(req.body.rechazado);
+    res.redirect("/solicitudesAdm");
+  });
 
   //////////////////////////// REGISTRO ADMIN //////////////////////////////
   // ruta del registro para ser administrador

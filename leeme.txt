@@ -1,0 +1,14 @@
+ANTES DE LOGUEARSE:
+
+Todas las contrasenas son 'admin' para los administradores
+y 'prof' para los profesionales.
+
+administradores(id):
+0 --> root
+222333444,
+333444555,
+
+
+
+profesionales(id):
+111222333

@@ -11,7 +11,6 @@ const router = express.Router();
 module.exports = (database) => {
   let datosAdminEnsesionado = [];
   let datosProfEnsesionado = [];
-  let tipoUsuario = 0;
 
   //////////////////////////// LOGIN ADMIN //////////////////////////////
   //ruta del inicio de sesion del admin
@@ -205,6 +204,7 @@ module.exports = (database) => {
         }
         if (registro[0].estado_pro == 1) {
           datosProfEnsesionado = registro;
+          console.log(datosProfEnsesionado);
           res.redirect("/menuProf");
         }
         if (registro[0].estado_pro == 2) {
@@ -264,7 +264,7 @@ module.exports = (database) => {
   //ruta del menu del admin
   router.get("/menuProf", (req, res) => {
     res.render("paginas/menuProf", {
-      prof: datosAdminEnsesionado,
+      prof: datosProfEnsesionado,
     });
   });
 

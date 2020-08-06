@@ -148,31 +148,35 @@ module.exports = (database) => {
       al crear un administrador, se inicia con estado pendiente,
       seguidamente se crea un usuario.
     */
+    try {
+      // creo un arreglo bidimensional con el nombre de las columnas y los valores a insertar (tomados del req.body)
+      let dataAdmin = [
+        ["nom_adm", req.body.nom_adm],
+        ["ape_adm", req.body.ape_adm],
+        ["telf_adm", req.body.telf_adm],
+        ["email_adm", req.body.email_adm], //el estado se maneja desde el modulo database
+      ];
+      //una vez von los datos en el arreglo procedo a hacer la insercion
+      await database.insert(
+        "administradores",
+        "ced_adm_pk",
+        req.body.ced_adm_pk,
+        dataAdmin
+      );
 
-    // creo un arreglo bidimensional con el nombre de las columnas y los valores a insertar (tomados del req.body)
-    let dataAdmin = [
-      ["nom_adm", req.body.nom_adm],
-      ["ape_adm", req.body.ape_adm],
-      ["telf_adm", req.body.telf_adm],
-      ["email_adm", req.body.email_adm], //el estado se maneja desde el modulo database
-    ];
-    //una vez von los datos en el arreglo procedo a hacer la insercion
-    await database.insert(
-      "administradores",
-      "ced_adm_pk",
-      req.body.ced_adm_pk,
-      dataAdmin
-    );
-
-    //inmediatamente paso a crear un usuario, se preparan los datos
-    let dataUsuario = [["passwd_usu", req.body.passwd_usu]]; // el tipo de usuario se maneja desde el modulo database
-    //una vez von los datos en el arreglo procedo a hacer la insercion
-    await database.insert(
-      "usuarios",
-      "ced_usu_pk",
-      req.body.ced_adm_pk,
-      dataUsuario
-    );
+      //inmediatamente paso a crear un usuario, se preparan los datos
+      let dataUsuario = [["passwd_usu", req.body.passwd_usu]]; // el tipo de usuario se maneja desde el modulo database
+      //una vez von los datos en el arreglo procedo a hacer la insercion
+      await database.insert(
+        "usuarios",
+        "ced_usu_pk",
+        req.body.ced_adm_pk,
+        dataUsuario
+      );
+    } catch (err) {
+      console.log(err);
+      res.send("usuario ya registrado!");
+    }
 
     // si todo salio bien me redirige al inicio
     res.redirect("/");
@@ -311,6 +315,19 @@ module.exports = (database) => {
       ],
     });
   });
+  router.post("/servicios", (req, res) => {
+    res.redirect("/llenarSolicitud");
+  });
 
+  ///////////////////////// LLENAR SOLICITUD CLIENTE //////////////////////////
+  router.get("/llenarSolicitud", async (req, res) => {
+    let especialidades = await database.selectTodo("especialidades");
+    let recursos = await database.selectTodo("recursos");
+
+    res.render("paginas/llenarSolicitud", {
+      esp: especialidades,
+      res: recursos,
+    });
+  });
   return router;
 };

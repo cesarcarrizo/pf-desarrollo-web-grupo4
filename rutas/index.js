@@ -329,8 +329,51 @@ module.exports = (database) => {
       res: recursos,
     });
   });
-  router.post("/llenarSolicitud", (req, res) => {
-    console.log(req.body);
+  router.post("/llenarSolicitud", async (req, res) => {
+    //insertar en la bd el cliente
+    let cliData = [
+      ["nom_cli", req.body.nom_cli],
+      ["ape_cli", req.body.ape_cli],
+      ["telf_cli", req.body.telf_cli],
+      ["email_cli", req.body.email_cli],
+    ];
+    let queryC = await database.insert(
+      "clientes",
+      "ced_cli_pk",
+      req.body.ced_cli_pk,
+      cliData
+    );
+
+    //insertar en la bd el proyecto
+    let dato = await database.getSiguientePk("proyectos");
+    let hoy = new Date();
+    let fecha_solicitud_proy =
+      hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
+
+    let nombreEsp = req.body.seleccion.split("-", 1);
+    nombreEsp[0] = nombreEsp[0].substring(0, nombreEsp[0].length - 1);
+    let cod_esp_fk_proy = await database.getCodEspecializacion(nombreEsp[0]);
+
+    let proyData = [
+      ["ced_cli_fk_proy", req.body.ced_cli_pk],
+      ["cod_esp_fk_proy", cod_esp_fk_proy[0].cod_esp_pk],
+      ["fecha_solicitud_proy", fecha_solicitud_proy],
+      ["desc_proy", req.body.desc_proy],
+    ];
+
+    let queryP = await database.insert(
+      "proyectos",
+      "cod_proy_pk",
+      dato[0].pk,
+      proyData
+    );
+
+    console.log("INSERCION TABLA clientes: " + JSON.stringify(queryC));
+    console.log("INSERCION TABLA proyectos: " + JSON.stringify(queryC));
+
+    // fix
+
+    res.redirect("/");
   });
   return router;
 };

@@ -15,6 +15,34 @@ const conx = mysql.createPool(config);
 // objeto a devolver con los registros o el output de las operaciones
 let registros = {};
 
+registros.getSiguientePk = (nomTabla) => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT COUNT(*)+1 as pk FROM ${nomTabla};`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
+registros.getCodEspecializacion = (nombreEsp) => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT cod_esp_pk FROM especialidades WHERE nom_esp='${nombreEsp}';`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
 registros.getAdminPeticiones = () => {
   return new Promise((resolve, reject) => {
     conx.query(

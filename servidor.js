@@ -1,6 +1,8 @@
 /*
     En este archivo se encuentra todo el control del back-end
 */
+const dbtest = require("./database");
+
 const enrutador = require("./rutas");
 const path = require("path"); // modulo para apuntar correctamente los archivos
 const database = require("./database"); // modulo con la logica CRUD de la base de datos
@@ -31,5 +33,6 @@ app.use("/static", express.static(path.join(__dirname, "./vistas/recursos")));
 app.use("/", enrutador(database));
 
 app.listen(PORT, () => {
-  console.log(`Servidor escuhando por el puerto ${PORT}...`);
+  console.log(`Servidor escuchando por el puerto ${PORT}...`);
+  // console.log(await dbtest.getSiguientePk("proyectos"));
 });

@@ -329,5 +329,8 @@ module.exports = (database) => {
       res: recursos,
     });
   });
+  router.post("/llenarSolicitud", (req, res) => {
+    console.log(req.body);
+  });
   return router;
 };

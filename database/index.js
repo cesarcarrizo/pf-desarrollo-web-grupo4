@@ -43,10 +43,38 @@ registros.getCodEspecializacion = (nombreEsp) => {
   });
 };
 
+registros.getCodListaProyectos = (cedCliente) => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT cod_li_pk as p FROM lista_proyectos WHERE ced_cli_fk_li=${cedCliente};`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
 registros.getAdminPeticiones = () => {
   return new Promise((resolve, reject) => {
     conx.query(
       `SELECT * FROM administradores WHERE estado_adm=0;`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
+registros.getProyPeticiones = () => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT * FROM lista_proyectos WHERE estado_proy_li=0;`,
       (err, resultados) => {
         if (err) return reject(err);
         else {
@@ -148,6 +176,11 @@ registros.insert = (tabla, col, pk, nuevaData) => {
     // si la tabla es usuarios se agrega el estado inicial 0: sin asignar (1: admin, 2: profesional)
     if (tabla == "usuarios") {
       columnas += ",tipo_usu";
+      valores += ",0";
+    }
+    // si la tabla es lista_proyectos se agrega el estado inicial 0: sin asignar (1: admin, 2: profesional)
+    if (tabla == "lista_proyectos") {
+      columnas += ",estado_proy_li";
       valores += ",0";
     }
     conx.query(

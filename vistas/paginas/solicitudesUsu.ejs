@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('parciales/head') %>
+    <title>TECH TEAM - PROYECTOS - Solicitudes</title>
+    <style>
+      .row {
+        font-size: 20px;
+      }
+      thead {
+        text-align: center;
+      }
+      tbody {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('parciales/encabezadoProf') %>
+    <!-- BODY -->
+    <div class="container">
+      <div class="jumbotron">
+        <h2>Solicitudes de Proyectos</h2>
+
+        <form method="POST" role="form">
+          <div class="form-group">
+            <label>Revise la lista de proyectos pendientes:</label>
+            <select class="form-control" name="seleccion">
+              <% peticiones.forEach((peticion)=>{ %>
+              <option
+                ><%= peticion.ced_cli_fk_li %> - CodEsp: <%=
+                peticion.cod_esp_fk_li %> FechaFinalizacion:
+                <%=peticion.fecha_finalizacion_li %> <% }); %>
+              </option></select
+            >
+          </div>
+
+          <div class="form-group">
+            <input
+              type="submit"
+              name="contratado"
+              value="Contratar"
+              class="btn btn-outline-success"
+            />
+            <input
+              type="submit"
+              name="rechazado"
+              value="Rechazar"
+              class="btn btn-outline-danger"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- FIN -->
+    <%- include('parciales/navProf') %> <%- include('parciales/scripts') %>
+  </body>
+</html>

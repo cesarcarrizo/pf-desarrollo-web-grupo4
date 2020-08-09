@@ -368,12 +368,57 @@ module.exports = (database) => {
       proyData
     );
 
-    console.log("INSERCION TABLA clientes: " + JSON.stringify(queryC));
-    console.log("INSERCION TABLA proyectos: " + JSON.stringify(queryC));
+    // insertamos el proyecto en la lista_proyectos para que puedan ser respondida la solicitud por el profesional
+    let dato1 = await database.getSiguientePk("lista_proyectos");
 
-    // fix
+    let liData = [
+      ["ced_cli_fk_li", req.body.ced_cli_pk],
+      ["cod_esp_fk_li", cod_esp_fk_proy[0].cod_esp_pk],
+      ["fecha_finalizacion_li", "pendiente"],
+    ];
 
+    let queryL = await database.insert(
+      "lista_proyectos",
+      "cod_li_pk",
+      dato1[0].pk,
+      liData
+    );
+
+    // checking..
+    /*
+    console.log("\nINSERCION TABLA clientes: " + JSON.stringify(queryC));
+    console.log("\nINSERCION TABLA proyectos: " + JSON.stringify(queryP));
+    console.log("\nINSERCION TABLA lista_proyectos: " + JSON.stringify(queryL));
+    */
     res.redirect("/");
+  });
+  /////////////////// PROYECTOS ENVIADOS ////////////////////////////////
+  router.get("/solicitudesUsu", async (req, res) => {
+    //res.send(await database.getProyPeticiones());
+    res.render("paginas/solicitudesUsu", {
+      peticiones: await database.getProyPeticiones(),
+    });
+  });
+  router.post("/solicitudesUsu", async (req, res) => {
+    let query = null;
+    let seleccion = req.body.seleccion.split(" ", 1);
+    if (req.body.contratado == "Contratar") {
+      let pk = await database.getCodListaProyectos(seleccion[0]);
+      // se actualizan los estados de acceso
+      query = await database.update("lista_proyectos", "cod_li_pk", pk[0].p, [
+        ["estado_proy_li", "1"], //1: contratado
+      ]);
+    }
+    if (req.body.rechazado == "Rechazar") {
+      let pk = await database.getCodListaProyectos(seleccion[0]);
+      // se actualizan los estados de acceso
+      query = await database.update("lista_proyectos", "cod_li_pk", pk[0].p, [
+        ["estado_proy_li", "2"],
+      ]);
+    }
+
+    res.redirect("/solicitudesUsu");
+    console.log(query);
   });
   return router;
 };

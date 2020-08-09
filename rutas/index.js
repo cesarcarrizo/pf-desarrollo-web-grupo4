@@ -420,5 +420,15 @@ module.exports = (database) => {
     res.redirect("/solicitudesUsu");
     console.log(query);
   });
+
+  ////////////////// PROYECTOS EN PROCESO ////////////////////////////
+  router.get("/proyectos", async (req, res) => {
+    let infoCli = [];
+    let infoProy = [];
+    let proyAceptados = await database.getProyAceptados();
+    console.log(proyAceptados);
+    res.render("paginas/proyectos", { proyAceptados });
+  });
+
   return router;
 };

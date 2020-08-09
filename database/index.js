@@ -15,6 +15,20 @@ const conx = mysql.createPool(config);
 // objeto a devolver con los registros o el output de las operaciones
 let registros = {};
 
+registros.getProyAceptados = () => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT C.*, P.*, L.fecha_finalizacion_li FROM lista_proyectos as L INNER JOIN clientes AS C ON C.ced_cli_pk=L.ced_cli_fk_li INNER JOIN proyectos AS P ON P.cod_proy_pk=L.cod_li_pk WHERE L.estado_proy_li=1;`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
 registros.getSiguientePk = (nomTabla) => {
   return new Promise((resolve, reject) => {
     conx.query(

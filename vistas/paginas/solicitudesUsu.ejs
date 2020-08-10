@@ -28,9 +28,11 @@
             <select class="form-control" name="seleccion">
               <% peticiones.forEach((peticion)=>{ %>
               <option
-                ><%= peticion.ced_cli_fk_li %> - CodEsp: <%=
-                peticion.cod_esp_fk_li %> FechaFinalizacion:
-                <%=peticion.fecha_finalizacion_li %> <% }); %>
+                ><%= peticion.ced_cli_pk %> - Cliente: <%= peticion.nom_cli %>
+                <%=peticion.ape_cli%> - Área de especialización: <%
+                peticion.nom_esp %>(Encargado de área: <%=peticion.nom_pro%>
+                <%=peticion.ape_pro%>) - Solicitud hecha el
+                <%=peticion.fecha_solicitud_proy %> <% }); %>
               </option></select
             >
           </div>
@@ -39,7 +41,7 @@
             <input
               type="submit"
               name="contratado"
-              value="Contratar"
+              value="Aceptar"
               class="btn btn-outline-success"
             />
             <input

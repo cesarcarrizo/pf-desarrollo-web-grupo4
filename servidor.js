@@ -1,7 +1,6 @@
 /*
     En este archivo se encuentra todo el control del back-end
 */
-const dbtest = require("./database");
 
 const enrutador = require("./rutas");
 const path = require("path"); // modulo para apuntar correctamente los archivos

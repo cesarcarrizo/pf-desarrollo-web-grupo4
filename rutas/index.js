@@ -273,9 +273,9 @@ module.exports = (database) => {
   });
 
   //////////////////////////// PERSONAL //////////////////////////////
-  router.get("/personal", (req, res) => {
-    res.render("paginas/personal");
-    // fix
+  router.get("/personal", async (req, res) => {
+    let params = await database.getEncargados();
+    res.render("paginas/personal", { params });
   });
 
   //////////////////////////// ABOUT //////////////////////////////////
@@ -402,7 +402,7 @@ module.exports = (database) => {
   router.post("/solicitudesUsu", async (req, res) => {
     let query = null;
     let seleccion = req.body.seleccion.split(" ", 1);
-    if (req.body.contratado == "Contratar") {
+    if (req.body.contratado == "Aceptar") {
       let pk = await database.getCodListaProyectos(seleccion[0]);
       // se actualizan los estados de acceso
       query = await database.update("lista_proyectos", "cod_li_pk", pk[0].p, [
@@ -423,8 +423,6 @@ module.exports = (database) => {
 
   ////////////////// PROYECTOS EN PROCESO ////////////////////////////
   router.get("/proyectos", async (req, res) => {
-    let infoCli = [];
-    let infoProy = [];
     let proyAceptados = await database.getProyAceptados();
     console.log(proyAceptados);
     res.render("paginas/proyectos", { proyAceptados });

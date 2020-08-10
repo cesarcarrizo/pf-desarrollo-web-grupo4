@@ -3,6 +3,15 @@
   <head>
     <%- include('parciales/head') %>
     <title>TECH TEAM - SOLICITAR SERVICIO</title>
+    <style>
+      body {
+        background: url("/static/alex.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
   </head>
 
   <body>
@@ -11,110 +20,115 @@
     <!-- BODY (corregir ortografia)-->
 
     <div class="container">
-      <div class="h3 text-dark float-center">
-        Para solicitar uno de nuestros servicios llene el siguiente formulario:
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>TECH TEAM</h1>
+        <p>
+          Para solicitar uno de nuestros servicios llene el siguiente
+          formulario:
+        </p>
+
+        <div class="jumbotron bg-dark text-white">
+          <form method="POST" role="form">
+            <div class="form-group">
+              <label>Número de identificación</label>
+              <input
+                name="ced_cli_pk"
+                type="text"
+                class="form-control"
+                placeholder="Cedula o Pasaporte"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Nombre</label>
+              <input
+                name="nom_cli"
+                type="text"
+                class="form-control"
+                placeholder="Digite nombre/es"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input
+                name="ape_cli"
+                type="text"
+                class="form-control"
+                placeholder="Digite apellido/os"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Celular</label>
+              <input
+                name="telf_cli"
+                type="text"
+                class="form-control"
+                placeholder="Digite telefono donde podamos contactarlo"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                name="email_cli"
+                type="text"
+                class="form-control"
+                placeholder="Digite email en donde podamos contactarlo"
+                required
+              />
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+              <label>Especialidad a solicitar</label>
+              <select class="form-control" name="seleccion">
+                <% esp.forEach((especialidad)=>{ %>
+                <option
+                  ><%= especialidad.nom_esp %> - <%= especialidad.desc_esp %>
+                </option>
+                <% }); %>
+              </select>
+            </div>
+
+            <div class="form-control">
+              <h3>Recursos que utiliza la empresa:</h3>
+              <% res.forEach((recurso)=>{ %>
+              <label>
+                <%= recurso.nom_res %>
+              </label>
+              <br />
+              <% }); %>
+            </div>
+
+            <div class="form-group">
+              <label>Decripción de la solicitud</label>
+              <input
+                name="desc_proy"
+                type="text"
+                class="form-control"
+                placeholder="..."
+                required
+              />
+            </div>
+
+            <br />
+
+            <div class="form-group">
+              <input
+                class="btn btn-success"
+                type="submit"
+                value="Solicitar Servicio"
+              />
+            </div>
+          </form>
+        </div>
       </div>
-      <form method="POST" role="form">
-        <div class="form-group">
-          <label>Número de identificación</label>
-          <input
-            name="ced_cli_pk"
-            type="text"
-            class="form-control"
-            placeholder="Cedula o Pasaporte"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Nombre</label>
-          <input
-            name="nom_cli"
-            type="text"
-            class="form-control"
-            placeholder="Digite nombre/es"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Apellidos</label>
-          <input
-            name="ape_cli"
-            type="text"
-            class="form-control"
-            placeholder="Digite apellido/os"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Celular</label>
-          <input
-            name="telf_cli"
-            type="text"
-            class="form-control"
-            placeholder="Digite telefono donde podamos contactarlo"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input
-            name="email_cli"
-            type="text"
-            class="form-control"
-            placeholder="Digite email en donde podamos contactarlo"
-            required
-          />
-        </div>
-
-        <hr />
-
-        <div class="form-group">
-          <label>Especialidad a solicitar</label>
-          <select class="form-control" name="seleccion">
-            <% esp.forEach((especialidad)=>{ %>
-            <option
-              ><%= especialidad.nom_esp %> - <%= especialidad.desc_esp %>
-            </option>
-            <% }); %>
-          </select>
-        </div>
-
-        <div class="form-control">
-          <h3>Recursos que utiliza la empresa:</h3>
-          <% res.forEach((recurso)=>{ %>
-          <label>
-            <%= recurso.nom_res %>
-          </label>
-          <br />
-          <% }); %>
-        </div>
-
-        <div class="form-group">
-          <label>Decripción de la solicitud</label>
-          <input
-            name="desc_proy"
-            type="text"
-            class="form-control"
-            placeholder="..."
-            required
-          />
-        </div>
-
-        <br />
-
-        <div class="form-group">
-          <input
-            class="btn btn-success"
-            type="submit"
-            value="Solicitar Servicio"
-          />
-        </div>
-      </form>
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
+
     <!--FIN BODY-->
     <%- include('parciales/nav') %> <%- include('parciales/scripts') %>
   </body>

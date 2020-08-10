@@ -3,38 +3,53 @@
   <head>
     <%- include('parciales/head') %>
     <title>TECH TEAM - HOME</title>
+    <style>
+      body {
+        background: url("/static/alex.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
   </head>
   <body>
     <%- include('parciales/encabezado') %>
 
     <!-- BODY -->
     <div class="container">
-      <img src="/static/tyler-frantaDesk.jpg" width="1110" height="500" />
-      <p></p>
-      <img src="/static/stil.jpg" class="float-left" width="550" height="700" />
-    </div>
-    <div class="container col-sm-">
-      <div class="jumbotron bg-primary text-white text-center">
-        <h1>Servicio personalizado al alcance de su mano</h1>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <p>-Networking</p>
-          <p>-PC Support & Instalacion</p>
-          <p>-Back Up de disco duro</p>
-          <p>-Data Recovery</p>
-          <p>-Soporte Remoto</p>
-          <p>-Soporte de Smartphone</p>
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>HOME</h1>
+        <p>Bienvenido/a</p>
+
+        <div class="jumbotron bg-dark text-dark">
+          <div class="row">
+            <img src="/static/tyler-frantaDesk.jpg" class="img-fluid" />
+          </div>
+          <div class="row">
+            <div class="jumbotron bg-dark text-white text-center">
+              <h1>Servicio personalizado al alcance de su mano</h1>
+              <p>-Networking</p>
+              <p>-PC Support & Instalacion</p>
+              <p>-Back Up de disco duro</p>
+              <p>-Data Recovery</p>
+              <p>-Soporte Remoto</p>
+              <p>-Soporte de Smartphone</p>
+              <p>-Reparacion de PC/Mac</p>
+              <p>-Consultas</p>
+              <p>-Soluciones TI</p>
+              <p>-Training</p>
+              <p>-Seguridad en Internet</p>
+            </div>
+          </div>
+          <div class="row">
+            <img src="/static/stil.jpg" class="img-fluid" />
+          </div>
         </div>
-        <div class="col-sm-6">
-          <p>-Reparacion de PC/Mac</p>
-          <p>-Consultas</p>
-          <p>-Soluciones TI</p>
-          <p>-Training</p>
-          <p>-Seguridad en Internet</p>
-        </div>
       </div>
     </div>
+
     <!-- FIN -->
     <%- include('parciales/nav') %> <%- include('parciales/scripts') %>
   </body>

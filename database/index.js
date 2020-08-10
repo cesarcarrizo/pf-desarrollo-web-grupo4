@@ -85,10 +85,26 @@ registros.getAdminPeticiones = () => {
   });
 };
 
+registros.getEncargados = () => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `select E.nom_esp, P.nom_pro, P.ape_pro, P.email_pro, P.telf_pro, E.desc_esp from profesionales as P inner join especialidades as E on E.ced_pro_fk_esp=P.ced_pro_pk;
+      `,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
 registros.getProyPeticiones = () => {
   return new Promise((resolve, reject) => {
     conx.query(
-      `SELECT * FROM lista_proyectos WHERE estado_proy_li=0;`,
+      `SELECT C.*, P.*, E.nom_esp, S.nom_pro, S.ape_pro FROM lista_proyectos as L INNER JOIN clientes AS C ON C.ced_cli_pk=L.ced_cli_fk_li INNER JOIN proyectos AS P ON P.cod_proy_pk=L.cod_li_pk INNER JOIN especialidades AS E ON E.id_recurso_esp=L.cod_esp_fk_li INNER JOIN profesionales as S ON S.ced_pro_pk=E.ced_pro_fk_esp WHERE L.estado_proy_li=0;
+      `,
       (err, resultados) => {
         if (err) return reject(err);
         else {

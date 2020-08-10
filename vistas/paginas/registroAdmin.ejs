@@ -3,88 +3,102 @@
   <head>
     <%- include('parciales/head') %>
     <title>TECH TEAM - Registro Administrador</title>
+    <style>
+      body {
+        background: url("/static/alex.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
   </head>
 
   <body>
     <%- include('parciales/encabezado') %>
 
     <!-- BODY (corregir ortografia)-->
-
     <div class="container">
-      <div class="h3 text-dark float-center">
-        Formulario de aplicacion para ser administrador
-      </div>
-      <form method="POST" role="form">
-        <div class="form-group">
-          <label>Número de identificación</label>
-          <input
-            name="ced_adm_pk"
-            type="text"
-            class="form-control"
-            placeholder="Cedula o Pasaporte"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Nombre</label>
-          <input
-            name="nom_adm"
-            type="text"
-            class="form-control"
-            placeholder="Digite nombre/es"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Apellidos</label>
-          <input
-            name="ape_adm"
-            type="text"
-            class="form-control"
-            placeholder="Digite apellido/os"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Celular</label>
-          <input
-            name="telf_adm"
-            type="text"
-            class="form-control"
-            placeholder="Digite telefono"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input
-            name="email_adm"
-            type="text"
-            class="form-control"
-            placeholder="Digite email"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label>Contraseña</label>
-          <input
-            name="passwd_usu"
-            type="text"
-            class="form-control"
-            placeholder="Digite un password, este sera su password en caso de ser aceptado"
-            required
-          />
-        </div>
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>TECH TEAM</h1>
+        <p>Formulario de aplicación para ser administrador</p>
 
-        <div class="form-group">
-          <input
-            class="btn btn-success"
-            type="submit"
-            value="Enviar solicitud"
-          />
+        <div class="jumbotron bg-dark text-white">
+          <form method="POST" role="form">
+            <div class="form-group">
+              <label>Número de identificación</label>
+              <input
+                name="ced_adm_pk"
+                type="text"
+                class="form-control"
+                placeholder="Cedula o Pasaporte"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Nombre</label>
+              <input
+                name="nom_adm"
+                type="text"
+                class="form-control"
+                placeholder="Digite nombre/es"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Apellidos</label>
+              <input
+                name="ape_adm"
+                type="text"
+                class="form-control"
+                placeholder="Digite apellido/os"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Celular</label>
+              <input
+                name="telf_adm"
+                type="text"
+                class="form-control"
+                placeholder="Digite telefono"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input
+                name="email_adm"
+                type="text"
+                class="form-control"
+                placeholder="Digite email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Contraseña</label>
+              <input
+                name="passwd_usu"
+                type="text"
+                class="form-control"
+                placeholder="Digite un password, este sera su password en caso de ser aceptado"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                class="btn btn-success"
+                type="submit"
+                value="Enviar solicitud"
+              />
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
+
     <!--FIN BODY-->
     <%- include('parciales/nav') %> <%- include('parciales/scripts') %>
   </body>

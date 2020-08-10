@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('parciales/head') %>
+    <title>TECH TEAM - PERSONAL</title>
+    <style>
+      body {
+        background: url("/static/alex.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('parciales/encabezado') %>
+
+    <div class="container">
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>Personal</h1>
+        <p>Nuestro talento está conformado por:</p>
+
+        <div class="jumbotron bg-dark text-dark">
+          <ul class="list-group list-group-flush">
+            <% params.forEach((prof) =>{ %>
+            <li class="list-group-item">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Área: <%= prof.nom_esp %></li>
+                <li class="list-group-item">
+                  Nombre: <%= prof.nom_pro %> <%= prof.ape_pro %>
+                </li>
+                <li class="list-group-item">Email: <%= prof.email_pro %></li>
+                <li class="list-group-item">Contacto: <%= prof.telf_pro %></li>
+                <li class="list-group-item">
+                  Descripción: <%= prof.desc_esp %>
+                </li>
+              </ul>
+            </li>
+            <%});%>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIN -->
+    <%- include('parciales/nav') %> <%- include('parciales/scripts') %>
+  </body>
+</html>

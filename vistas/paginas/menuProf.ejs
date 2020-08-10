@@ -3,24 +3,36 @@
   <head>
     <%- include('parciales/head') %>
     <title>TECH TEAM - PROFESIONALES</title>
+    <style>
+      body {
+        background: url("/static/labe.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
   </head>
   <body>
     <%- include('parciales/encabezadoProf') %>
     <!-- BODY -->
     <div class="container">
-      <hr />
-      <div class="h1 text-dark">Perfil</div>
-      <br />
-      <h3>PROFESIONAL: <%= prof[0].nom_pro %></h3>
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>PROF Home</h1>
 
-      <br />
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Apellidos: <%= prof[0].ape_pro %></li>
-        <li class="list-group-item">Email: <%= prof[0].email_pro %></li>
-        <li class="list-group-item">Telefono: <%= prof[0].telf_pro %></li>
-        <li class="list-group-item">Direccion: <%= prof[0].resi_pro %></li>
-      </ul>
+        <div class="jumbotron bg-dark text-dark">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nombre: <%= prof[0].nom_pro %></li>
+            <li class="list-group-item">Apellidos: <%= prof[0].ape_pro %></li>
+            <li class="list-group-item">Email: <%= prof[0].email_pro %></li>
+            <li class="list-group-item">Telefono: <%= prof[0].telf_pro %></li>
+            <li class="list-group-item">Direccion: <%= prof[0].resi_pro %></li>
+          </ul>
+        </div>
+      </div>
     </div>
+
     <!-- FIN -->
     <%- include('parciales/navProf') %> <%- include('parciales/scripts') %>
   </body>

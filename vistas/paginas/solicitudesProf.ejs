@@ -13,44 +13,55 @@
       tbody {
         text-align: center;
       }
+      body {
+        background: url("/static/door.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
     </style>
   </head>
   <body>
     <%- include('parciales/encabezadoAdm') %>
     <!-- BODY -->
     <div class="container">
-      <div class="jumbotron">
-        <h2>Solicitudes para ser Profesional</h2>
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>Candidatos a profesional</h1>
+        <p>Solicitudes para ser Profesional</p>
 
-        <form method="POST" role="form">
-          <div class="form-group">
-            <label>Revise la lista de candidatos:</label>
-            <select class="form-control" name="seleccion">
-              <% peticiones.forEach((peticion)=>{ %>
-              <option
-                ><%= peticion.ced_pro_pk %> - <%= peticion.nom_pro %>
-                <%=peticion.ape_pro %> - <%= peticion.telf_pro %> - <%=
-                peticion.email_pro %></option
-              >
-              <% }); %>
-            </select>
-          </div>
+        <div class="jumbotron bg-dark text-white">
+          <form method="POST" role="form">
+            <div class="form-group">
+              <label>Revise la lista de candidatos:</label>
+              <select class="form-control" name="seleccion">
+                <% peticiones.forEach((peticion)=>{ %>
+                <option
+                  ><%= peticion.ced_pro_pk %> - <%= peticion.nom_pro %>
+                  <%=peticion.ape_pro %> - <%= peticion.telf_pro %> - <%=
+                  peticion.email_pro %></option
+                >
+                <% }); %>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <input
-              type="submit"
-              name="contratado"
-              value="Contratar"
-              class="btn btn-outline-success"
-            />
-            <input
-              type="submit"
-              name="rechazado"
-              value="Rechazar"
-              class="btn btn-outline-danger"
-            />
-          </div>
-        </form>
+            <div class="form-group">
+              <input
+                type="submit"
+                name="contratado"
+                value="Contratar"
+                class="btn btn-outline-success"
+              />
+              <input
+                type="submit"
+                name="rechazado"
+                value="Rechazar"
+                class="btn btn-outline-danger"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 

@@ -3,22 +3,35 @@
   <head>
     <%- include('parciales/head') %>
     <title>TECH TEAM - ADMIN</title>
+    <style>
+      body {
+        background: url("/static/door.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
   </head>
   <body>
     <%- include('parciales/encabezadoAdm') %>
     <!-- BODY -->
     <div class="container">
-      <hr />
-      <div class="h1 text-dark">Perfil</div>
-      <br />
-      <h3>ADMIN: <%= nom_adm %></h3>
-      <br />
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Apellidos: <%= ape_adm %></li>
-        <li class="list-group-item">Email: <%= email_adm %></li>
-        <li class="list-group-item">Telefono: <%= telf_adm %></li>
-      </ul>
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>ADMIN Home</h1>
+
+        <div class="jumbotron bg-dark text-black">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Nombre: <%= nom_adm %></li>
+            <li class="list-group-item">Apellidos: <%= ape_adm %></li>
+            <li class="list-group-item">Email: <%= email_adm %></li>
+            <li class="list-group-item">Telefono: <%= telf_adm %></li>
+          </ul>
+        </div>
+      </div>
     </div>
+
     <!-- FIN -->
     <%- include('parciales/navAdmin') %> <%- include('parciales/scripts') %>
   </body>

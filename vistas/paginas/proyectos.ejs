@@ -3,44 +3,84 @@
   <head>
     <%- include('parciales/head') %>
     <title>TECH TEAM - PROFESIONALES - PROYECTOS</title>
+    <style>
+      body {
+        background: url("/static/labe.jpg") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+      }
+    </style>
   </head>
+
   <body>
     <%- include('parciales/encabezadoProf') %>
     <!-- BODY -->
     <div class="container">
-      <h1>Proyectos en curso...</h1>
-      <ul class="list-group">
-        <% proyAceptados.forEach((proy) => { %>
-        <li class="list-group-item">
-          <div class="card" style="width: 100;">
-            <div class="card-header">
-              ID Proyecto: <%= proy.cod_proy_pk %>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">
-                Cliente: <%= proy.nom_cli %> <%= proy.ape_cli %>
-              </li>
-              <li class="list-group-item">
-                ID Cliente: <%= proy.ced_cli_pk %>
-              </li>
-              <li class="list-group-item">
-                Telefono: <%= proy.telf_cli %>
-              </li>
-              <li class="list-group-item">Email: <%= proy.email_cli %></li>
-              <li class="list-group-item">
-                Fecha de inicio: <%= proy.fecha_solicitud_proy %>
-              </li>
-              <li class="list-group-item">
-                Fecha de finalizacion: <%= proy.fecha_finalizacion_li %>
-              </li>
-              <li class="list-group-item">
-                Descripción del Proyecto: <%=proy.desc_proy %>
-              </li>
-            </ul>
+      <div class="jumbotron bg-light">
+        <div class="back"></div>
+        <h1>Proyectos en Curso</h1>
+
+        <div class="jumbotron bg-dark text-black">
+          <ul class="list-group">
+            <% proyAceptados.forEach((proy) => { %>
+            <li class="list-group-item">
+              <div class="card" style="width: 100;">
+                <div class="card-header">
+                  ID Proyecto: <%= proy.cod_proy_pk %>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    Cliente: <%= proy.nom_cli %> <%= proy.ape_cli %>
+                  </li>
+                  <li class="list-group-item">
+                    ID Cliente: <%= proy.ced_cli_pk %>
+                  </li>
+                  <li class="list-group-item">
+                    Telefono: <%= proy.telf_cli %>
+                  </li>
+                  <li class="list-group-item">Email: <%= proy.email_cli %></li>
+                  <li class="list-group-item">
+                    Fecha de inicio: <%= proy.fecha_solicitud_proy %>
+                  </li>
+                  <li class="list-group-item">
+                    Fecha de finalizacion: <%= proy.fecha_finalizacion_li %>
+                  </li>
+                  <li class="list-group-item">
+                    Descripción del Proyecto: <%=proy.desc_proy %>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <%});%>
+          </ul>
+        </div>
+
+        <br />
+        <form method="post" role="form">
+          <div class="form-group">
+            <label for="selec">Terminar proyecto...</label>
+            <select class="form-control" name="opcion">
+              <% proyAceptados.forEach((proy)=>{%>
+              <option><%= proy.cod_proy_pk %> - En curso...</option>
+              <%});%>
+            </select>
           </div>
-        </li>
-        <%});%>
-      </ul>
+          <div class="form-group">
+            <br />
+            <input
+              type="submit"
+              value="Terminar"
+              class="btn btn-outline-danger"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>Proyectos en curso...</h1>
     </div>
 
     <!-- FIN -->

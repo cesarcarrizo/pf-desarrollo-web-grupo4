@@ -427,6 +427,22 @@ module.exports = (database) => {
     console.log(proyAceptados);
     res.render("paginas/proyectos", { proyAceptados });
   });
+  router.post("/proyectos", async (req, res) => {
+    //console.log(req.body.opcion);
+    let pk = req.body.opcion.split(" ", 1);
+    //console.log(pk[0]);
+    let query = await database.update("lista_proyectos", "cod_li_pk", pk[0], [
+      ["estado_proy_li", "2"],
+    ]);
+    console.log(query);
+    res.redirect("/proyectos");
+  });
+
+  /////////////////// HISTORIAL ///////////////////////////////////////////////////
+  router.get("/historial", async (req, res) => {
+    let proyTerminados = await database.getProyTerminados();
+    res.render("paginas/historial", { proyTerminados });
+  });
 
   return router;
 };

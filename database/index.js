@@ -29,6 +29,20 @@ registros.getProyAceptados = () => {
   });
 };
 
+registros.getProyTerminados = () => {
+  return new Promise((resolve, reject) => {
+    conx.query(
+      `SELECT C.*, P.* FROM lista_proyectos as L INNER JOIN clientes AS C ON C.ced_cli_pk=L.ced_cli_fk_li INNER JOIN proyectos AS P ON P.cod_proy_pk=L.cod_li_pk WHERE L.estado_proy_li=2;`,
+      (err, resultados) => {
+        if (err) return reject(err);
+        else {
+          return resolve(JSON.parse(JSON.stringify(resultados)));
+        }
+      }
+    );
+  });
+};
+
 registros.getSiguientePk = (nomTabla) => {
   return new Promise((resolve, reject) => {
     conx.query(

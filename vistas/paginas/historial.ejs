@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%- include('parciales/head') %>
-    <title>TECH TEAM - PROFESIONALES - PROYECTOS</title>
+    <title>TECH TEAM - PROFESIONALES</title>
     <style>
       body {
         background: url("/static/labe.jpg") no-repeat center center fixed;
@@ -13,18 +13,17 @@
       }
     </style>
   </head>
-
   <body>
     <%- include('parciales/encabezadoProf') %>
     <!-- BODY -->
     <div class="container">
       <div class="jumbotron bg-light">
         <div class="back"></div>
-        <h1>Proyectos en Curso</h1>
+        <h1>Historial</h1>
 
-        <div class="jumbotron bg-dark text-black">
+        <div class="jumbotron bg-dark text-dark">
           <ul class="list-group">
-            <% proyAceptados.forEach((proy) => { %>
+            <% proyTerminados.forEach((proy) => { %>
             <li class="list-group-item">
               <div class="card" style="width: 100;">
                 <div class="card-header">
@@ -42,13 +41,10 @@
                   </li>
                   <li class="list-group-item">Email: <%= proy.email_cli %></li>
                   <li class="list-group-item">
-                    Fecha de inicio: <%= proy.fecha_solicitud_proy %>
-                  </li>
-                  <li class="list-group-item">
-                    Fecha de finalizacion: <%= proy.fecha_finalizacion_li %>
-                  </li>
-                  <li class="list-group-item">
                     Descripción del Proyecto: <%=proy.desc_proy %>
+                  </li>
+                  <li class="list-group-item">
+                    Estatus: Terminado
                   </li>
                 </ul>
               </div>
@@ -56,26 +52,6 @@
             <%});%>
           </ul>
         </div>
-
-        <br />
-        <form method="post" role="form">
-          <div class="form-group">
-            <label for="opcion">Terminar proyecto...</label>
-            <select class="form-control" name="opcion">
-              <% proyAceptados.forEach((proy)=>{%>
-              <option><%= proy.cod_proy_pk %> - En curso...</option>
-              <%});%>
-            </select>
-          </div>
-          <div class="form-group">
-            <br />
-            <input
-              type="submit"
-              value="Terminar"
-              class="btn btn-outline-danger"
-            />
-          </div>
-        </form>
       </div>
     </div>
 
